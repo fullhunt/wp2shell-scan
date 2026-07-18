@@ -1,6 +1,8 @@
 <h1 align="center">wp2shell-scan</h1>
 <h4 align="center">A scanner and proof-of-concept toolkit for CVE-2026-63030 (wp2shell), a pre-authenticated remote code execution vulnerability in WordPress core</h4>
 
+![](https://dkh9ehwkisc4.cloudfront.net/static/files/62b9b146-d0c8-470b-ab54-94d0766afae6-wp2shell-banner.png)
+
 # Features
 
 - Two non-destructive detection methods: `--check-type time-based` (SLEEP timing) and `--check-type error-based` (TRUE/FALSE/broken differential). Both safe for broad estate scans.
