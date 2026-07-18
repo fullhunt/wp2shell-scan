@@ -17,7 +17,7 @@
 
 CVE-2026-63030 ("wp2shell") is a pre-authenticated remote code execution vulnerability in WordPress core. A route-confusion / index-desynchronisation bug in the REST API batch endpoint (`/batch/v1`) lets an unauthenticated attacker smuggle an unsanitised `author_exclude` value into `WP_Query`, resulting in SQL injection. Where the database user holds the FILE privilege, this leads to remote code execution via `SELECT ... INTO OUTFILE`. No plugins are required. A stock WordPress install is affected.
 
-WordPress shipped fixes in **6.9.5, 7.0.2, and 7.1-beta2**. Patch immediately. If you need help scanning or discovering this vulnerability on your infrastructure, email team@fullhunt.io.
+WordPress shipped fixes in **6.9.5, 7.0.2, and 7.1-beta2**. Patch immediately. If you need help scanning or discovering this vulnerability on your infrastructure, email team@fullhunt.io. Read more about it at [fullhunt.io/blog/2026/07/17/wp2shell-wordpress-core-pre-auth-rce-cve-2026-63030](https://fullhunt.io/blog/2026/07/17/wp2shell-wordpress-core-pre-auth-rce-cve-2026-63030).
 
 | Branch | Vulnerable | Fixed |
 |--------|------------|-------|
