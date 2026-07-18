@@ -1,11 +1,11 @@
 <h1 align="center">wp2shell-scan</h1>
-<h4 align="center">A scanner and proof-of-concept toolkit for CVE-2026-63030 (wp2shell) — pre-authenticated remote code execution in WordPress core</h4>
+<h4 align="center">A scanner and proof-of-concept toolkit for CVE-2026-63030 (wp2shell), a pre-authenticated remote code execution vulnerability in WordPress core</h4>
 
 # Features
 
 - Two non-destructive detection methods: `--check-type time-based` (SLEEP timing) and `--check-type error-based` (TRUE/FALSE/broken differential). Both safe for broad estate scans.
 - Support for lists of URLs and multiple targets in a single run.
-- Content-based Boolean oracle extraction — works without SLEEP, error output, or MySQL FILE privileges.
+- Content-based Boolean oracle extraction works without SLEEP, error output, or MySQL FILE privileges.
 - Timing-based blind extraction fallback for unreliable Boolean oracles.
 - REST endpoint probing to find which routes pass the injection through to WP_Query.
 - Full exploit-chain validation (SQLi → INTO OUTFILE → PHP execution), gated behind an explicit `--i-have-authorization` flag.
@@ -15,9 +15,9 @@
 
 # 🚨 Announcement (July 2026)
 
-CVE-2026-63030 ("wp2shell") is a pre-authenticated remote code execution vulnerability in WordPress core. A route-confusion / index-desynchronisation bug in the REST API batch endpoint (`/batch/v1`) lets an unauthenticated attacker smuggle an unsanitised `author_exclude` value into `WP_Query`, resulting in SQL injection — and, where the database user holds the FILE privilege, remote code execution via `SELECT ... INTO OUTFILE`. No plugins are required; a stock WordPress install is affected.
+CVE-2026-63030 ("wp2shell") is a pre-authenticated remote code execution vulnerability in WordPress core. A route-confusion / index-desynchronisation bug in the REST API batch endpoint (`/batch/v1`) lets an unauthenticated attacker smuggle an unsanitised `author_exclude` value into `WP_Query`, resulting in SQL injection. Where the database user holds the FILE privilege, this leads to remote code execution via `SELECT ... INTO OUTFILE`. No plugins are required. A stock WordPress install is affected.
 
-WordPress shipped fixes in **6.9.5, 7.0.2, and 7.1-beta2** — patch immediately. If help is needed in scanning and discovering this vulnerability on your infrastructure, please get in touch at (team@fullhunt.io).
+WordPress shipped fixes in **6.9.5, 7.0.2, and 7.1-beta2**. Patch immediately. If you need help scanning or discovering this vulnerability on your infrastructure, email team@fullhunt.io.
 
 | Branch | Vulnerable | Fixed |
 |--------|------------|-------|
