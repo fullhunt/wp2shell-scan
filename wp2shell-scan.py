@@ -21,13 +21,18 @@ import time
 from urllib.parse import quote, urlsplit, urlunsplit
 
 import requests
-import urllib3
 
 try:
     from termcolor import cprint
 except ImportError:  # fall back to plain output if termcolor is unavailable
     def cprint(text, color=None):
         print(text)
+
+try:
+    import requests.packages.urllib3
+    requests.packages.urllib3.disable_warnings()
+except Exception:
+    pass
 
 
 cprint("[•] CVE-2026-63030 - WordPress Core wp2shell RCE Scanner", "green")
@@ -159,8 +164,9 @@ parser.add_argument("--check-type",
                     help="Detection method for check mode - [Default: time-based].")
 parser.add_argument("-k", "--insecure",
                     dest="insecure",
-                    help="Disable TLS certificate verification.",
-                    action="store_true")
+                    help="Disable TLS certificate verification (default: disabled).",
+                    action="store_true",
+                    default=True)
 parser.add_argument("--timeout",
                     dest="timeout",
                     type=float, default=15,
@@ -223,7 +229,6 @@ parser.add_argument("-v", "--verbose",
 
 args = parser.parse_args()
 
-
 if not args.url and not args.usedlist:
     parser.error("one of -u/--url or -l/--list is required.")
 
@@ -260,10 +265,6 @@ args.webroot = webroots
 proxies = {}
 if args.proxy:
     proxies = {"http": args.proxy, "https": args.proxy}
-
-if args.insecure:
-    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-
 
 # ---------------------------------------------------------------------------
 # Request builders
