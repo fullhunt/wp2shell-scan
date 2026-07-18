@@ -1,0 +1,2 @@
+GRANT FILE ON *.* TO 'wpuser'@'%';
+FLUSH PRIVILEGES;
